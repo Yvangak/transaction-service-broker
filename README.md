@@ -1,2 +1,4 @@
 # transaction-service-broker
-This repository is a demo implementation of a message broker using RabbitMq and spring cloud stream
+This repository is a demo implementation of a transaction service with a message broker.
+- spring cloud stream
+- RabbitMq
