@@ -1,4 +1,4 @@
-package com.broker.subscription.transactionsubscription;
+package com.broker.subscription;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
