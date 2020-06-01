@@ -18,7 +18,8 @@ public class TransactionPublisherService {
 
     public void publishMessage(Transaction transaction){
         iTransactionPublisherService.transactionOrders()
-                .send(MessageBuilder.withPayload(transaction)
-                .build());
+                .send(MessageBuilder
+                        .withPayload(transaction)
+                        .build());
     }
 }

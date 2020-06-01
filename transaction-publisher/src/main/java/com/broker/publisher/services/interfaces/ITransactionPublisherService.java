@@ -4,6 +4,8 @@ import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;
 
 public interface ITransactionPublisherService {
-    @Output("transactions")
+    String OUTPUT = "transactions";
+
+    @Output(ITransactionPublisherService.OUTPUT)
     MessageChannel transactionOrders();
 }
