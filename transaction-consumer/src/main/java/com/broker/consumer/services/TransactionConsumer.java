@@ -8,7 +8,7 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 @EnableBinding(ITransactionConsumer.class)
 public class TransactionConsumer {
 
-    @StreamListener(ITransactionConsumer.INPUT)
+    @StreamListener(value = ITransactionConsumer.INPUT, condition = "headers['type']=='MULTI_ASSET'")
     public void processTransaction(Transaction transaction) {
         System.out.println(transaction);
     }
