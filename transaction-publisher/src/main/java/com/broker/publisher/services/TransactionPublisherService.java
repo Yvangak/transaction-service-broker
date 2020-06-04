@@ -2,6 +2,7 @@ package com.broker.publisher.services;
 
 import com.broker.publisher.services.interfaces.ITransactionPublisherService;
 import com.broker.publisher.services.models.Transaction;
+import com.broker.publisher.services.models.enums.TransactionMessageHeaders;
 import com.broker.publisher.services.models.enums.TransactionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.EnableBinding;
@@ -21,8 +22,9 @@ public class TransactionPublisherService {
     public void publishMessage(Transaction transaction){
         Message<Transaction> message = MessageBuilder
                 .withPayload(transaction)
-                .setHeader("type", TransactionType.CASH)
+                .setHeader(TransactionMessageHeaders.TYPE.toString(), TransactionType.CASH)
                 .build();
+
         iTransactionPublisherService.transactionOrders()
                 .send(message);
     }

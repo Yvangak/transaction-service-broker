@@ -9,17 +9,18 @@ import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.messaging.Message;
 
 @EnableBinding({ITransactionConsumer.class, IErrorTransactionProcessor.class})
-public class TransactionConsumer {
+public class TransactionConsumerService {
 
     @StreamListener(value = ITransactionConsumer.INPUT,
-            condition = "headers['type']=='CASH'"
+            condition = "headers['TYPE']=='CASH' || headers['TYPE']=='ASSET'"
     )
-    public void processTransaction(Transaction transaction) {
-        System.out.println(transaction);
-        if (transaction.getTransactionCode().equals("TRZ")) {
-            throw new RuntimeException("BOOM!!!! Error identified" + transaction);
+    public void processTransaction(Message<Transaction> message) {
+        System.out.println("Header"+ message.getHeaders());
+        System.out.println("Payload"+ message.getPayload());
+        if (message.getPayload().getTransactionCode().equals("TRZ")) {
+            throw new RuntimeException("BOOM!!!! Error identified" + message);
         }else{
-            System.out.println(">>>>> Transaction handled perfectly: " + transaction);
+            System.out.println(">>>>> Transaction handled perfectly: " + message);
         }
     }
 
